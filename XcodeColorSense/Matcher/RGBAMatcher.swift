@@ -13,14 +13,14 @@ struct RGBAMatcher: Matcher {
   func check(line: String, selectedText: String) -> (color: NSColor, range: NSRange)? {
     guard line.contains("UIColor") || line.contains("NSColor") else { return nil }
 
-    let range = (line as NSString).rangeOfString("red")
+    let range = (line as NSString).range(of: "red")
 
-    guard let red = find("red", line: line),
-      green = find("green", line: line),
-      blue = find("blue", line: line) where range.length > 0
+    guard let red = find(component: "red", line: line),
+        let green = find(component: "green", line: line),
+        let blue = find(component: "blue", line: line), range.length > 0
       else { return nil }
 
-    let alpha = find("alpha", line: line) ?? 1.0
+    let alpha = find(component: "alpha", line: line) ?? 1.0
     let color = NSColor(red: red, green: green, blue: blue, alpha: alpha)
 
     return (color: color, range: range)
@@ -28,16 +28,16 @@ struct RGBAMatcher: Matcher {
 
   func find(component: String, line: String) -> CGFloat? {
     let pattern = "\(component)\\s*:\\s*[0-9]*\\.?[0-9]*f?\\s*(\\/\\s*[0-9]*\\.?[0-9]*f?)?"
-    guard let range = Regex.check(line, pattern: pattern) else { return nil }
+    guard let range = Regex.check(string: line, pattern: pattern) else { return nil }
 
     let string = (line as NSString)
-      .substringWithRange(range)
-      .remove(component)
-      .remove(":")
-      .remove("f")
+        .substring(with: range)
+        .remove(occurrence: component)
+        .remove(occurrence: ":")
+        .remove(occurrence: "f")
       .trim()
 
-    let parts = string.componentsSeparatedByString("/").flatMap {
+    let parts = (string.components(separatedBy: "/")).compactMap {
       return Float($0.trim())
     }
 

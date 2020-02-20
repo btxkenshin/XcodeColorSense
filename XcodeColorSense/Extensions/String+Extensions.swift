@@ -10,19 +10,21 @@ import Foundation
 
 extension String {
   
-  func contains(string: String) -> Bool {
-    return rangeOfString(string, options: .CaseInsensitiveSearch) != nil
-  }
+//  func contains(string: String) -> Bool {
+//    return self.contains(string: string)
+////    return rangeOfString(string, options: .CaseInsensitiveSearch) != nil
+//  }
 
   func replace(occurence: String, with: String) -> String {
-    return stringByReplacingOccurrencesOfString(occurence, withString: with)
+    return replacingOccurrences(of: occurence, with: with)
+//    return stringByReplacingOccurrencesOfString(occurence, withString: with)
   }
 
   func remove(occurrence: String) -> String {
-    return replace(occurrence, with: "")
+    return replace(occurence: occurrence, with: "")
   }
 
   func trim() -> String {
-    return stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+    return trimmingCharacters(in: NSCharacterSet.whitespaces)
   }
 }

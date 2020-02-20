@@ -14,29 +14,29 @@ struct PresetMatcher: Matcher {
     guard line.contains("UIColor") || line.contains("NSColor") else { return nil }
 
     let presets: [String: NSColor] = [
-      "blackColor": .blackColor(),
-      "darkGrayColor": .darkGrayColor(),
-      "lightGrayColor": .lightGrayColor(),
-      "whiteColor": .whiteColor(),
-      "grayColor": .grayColor(),
-      "redColor": .redColor(),
-      "greenColor": .greenColor(),
-      "blueColor": .blueColor(),
-      "cyanColor": .cyanColor(),
-      "yellowColor": .yellowColor(),
-      "magentaColor": .magentaColor(),
-      "orangeColor": .orangeColor(),
-      "purpleColor": .purpleColor(),
-      "brownColor": .brownColor(),
-      "clearColor": .clearColor(),
+        "blackColor": .black,
+      "darkGrayColor": .darkGray,
+      "lightGrayColor": .lightGray,
+      "whiteColor": .white,
+      "grayColor": .gray,
+      "redColor": .red,
+      "greenColor": .green,
+      "blueColor": .blue,
+      "cyanColor": .cyan,
+      "yellowColor": .yellow,
+      "magentaColor": .magenta,
+      "orangeColor": .orange,
+      "purpleColor": .purple,
+      "brownColor": .brown,
+      "clearColor": .clear,
 
-      "controlShadowColor": .controlShadowColor(),
-      "controlDarkShadowColor": .controlDarkShadowColor(),
-      "controlColor": .controlColor(),
+      "controlShadowColor": .controlShadowColor,
+      "controlDarkShadowColor": .controlDarkShadowColor,
+      "controlColor": .controlColor,
     ]
 
     for preset in presets {
-      let range = (line as NSString).rangeOfString(preset.0)
+        let range = (line as NSString).range(of: preset.0)
       if range.location != NSNotFound {
         return (color: preset.1, range: range)
       }

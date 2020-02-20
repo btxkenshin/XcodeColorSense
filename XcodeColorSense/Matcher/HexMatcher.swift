@@ -14,15 +14,15 @@ public struct HexMatcher: Matcher {
     let pattern1 = "\"#?[A-Fa-f0-9]{6}\""
     let pattern2 = "0x[A-Fa-f0-9]{6}"
 
-    let ranges = [pattern1, pattern2].flatMap {
-      return Regex.check(line, pattern: $0)
+    let ranges = [pattern1, pattern2].compactMap {
+        return Regex.check(string: line, pattern: $0)
     }
 
     guard let range = ranges.first
       else { return nil }
 
-    let text = (line as NSString).substringWithRange(range).replace("0x", with: "").replace("\"", with: "")
-    let color = NSColor.hex(text)
+    let text = (line as NSString).substring(with: range).replace(occurence: "0x", with: "").replace(occurence:"\"", with: "")
+    let color = NSColor.hex(string: text)
 
     return (color: color, range: range)
   }

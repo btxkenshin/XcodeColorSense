@@ -13,15 +13,16 @@ extension NSColor {
   // https://github.com/hyperoslo/Hue/blob/master/Source/iOS/UIColor%2BHue.swift
   public static func hex(string: String) -> NSColor {
     var hex = string.hasPrefix("#")
-      ? String(string.characters.dropFirst())
+        ? String(string.dropFirst())
       : string
 
-    guard hex.characters.count == 3 || hex.characters.count == 6
-      else { return NSColor.whiteColor().colorWithAlphaComponent(0.0) }
+    guard hex.count == 3 || hex.count == 6
+        else { return NSColor.white.withAlphaComponent(0.0) }
 
-    if hex.characters.count == 3 {
-      for (index, char) in hex.characters.enumerate() {
-        hex.insert(char, atIndex: hex.startIndex.advancedBy(index * 2))
+    if hex.count == 3 {
+        for (index, char) in hex.enumerated() {
+//            hex.insert(char, at: hex.startIndex.advancedBy(index * 2))
+            hex.insert(char, at: hex.index(hex.startIndex, offsetBy: index * 2))
       }
     }
 

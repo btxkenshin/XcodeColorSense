@@ -12,6 +12,6 @@ struct Regex {
 
   static func check(string: String, pattern: String) -> NSRange? {
     let regex = try? NSRegularExpression(pattern: pattern, options: [])
-    return regex?.firstMatchInString(string, options: [], range: NSMakeRange(0, string.characters.count))?.range
+    return regex?.firstMatch(in: string, options: [], range: NSMakeRange(0, string.count))?.range
   }
 }

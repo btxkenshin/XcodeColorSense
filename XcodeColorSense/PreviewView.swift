@@ -13,8 +13,8 @@ class PreviewView: NSColorWell {
   override init(frame frameRect: NSRect) {
     super.init(frame: frameRect)
 
-    bordered = false
-    layer?.borderColor = NSColor.brownColor().CGColor
+    isBordered = false
+    layer?.borderColor = NSColor.brown.cgColor
     layer?.borderWidth = 1.0
   }
 
